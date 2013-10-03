@@ -1,9 +1,11 @@
 #!/bin/bash
 
-install -m 700 -d /root/.ssh
-install -m 600    /root/.ssh/authorized_keys
+HOME=${HOME:/root}
 
-cat keys/*.pub >> /root/.ssh/authorized_keys 
+cat keys/*.pub >> authorized_keys.tmp
 
-chmod 600  /root/.ssh/authorized_keys 
+install -m 700 -d ${HOME}/.ssh
+install -m 600     authorized_keys.tmp  ${HOME}/.ssh/authorized_keys
+chmod 600  ${HOME}/.ssh/authorized_keys
 
+rm -f authorized_keys.tmp 
